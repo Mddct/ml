@@ -28,23 +28,4 @@ mddct@mddcts-MacBook-Pro ~/machine-learning> time go run isnullfeature.go
 - pandas 读取任一个文件， 探索每个特征含义，
 - go 处理整个分类特征的取值范围， 存入文件中， 文件名格式 [featureName]Categoty.txt
 * C1-C14 bar chart
-
-
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C21Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C21Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C20Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C20Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C19Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C19Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C18Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C18Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C17Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C17Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C16Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C16Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C15Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C15Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/C14Map.txt.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/C14Map.txt_2018-06-06_12-14-45.png]]
-#+DOWNLOADED: file:///Users/mddct/org/ml/CxxMap/barchart.png @ 2018-06-06 12:14:45
-[[file:C1-C14 bar chart/barchart_2018-06-06_12-14-45.png]]
+[[C1-14/barchart_2018-06-06_12-14-45.png]]
