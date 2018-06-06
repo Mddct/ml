@@ -1,0 +1,119 @@
+* DONE 分割文件58个， 总共40428968行，24个特征, 每个文件大约70万行
+  CLOSED: [2018-05-29 Tue 09:34]
+  #+BEGIN_SRC bash
+    mddct@mddcts-MacBook-Pro ~/m/dataProcess> time split -l 700000  train.csv  split
+    388.64 real        40.99 user       332.97 sys
+    mddct@mddcts-MacBook-Pro ~/m/dataProcess>  ls -al split* | wc -l
+    58
+  #+END_SRC
+
+
+* DONE 修改文件名为split[0-9]*
+  CLOSED: [2018-05-29 Tue 09:34]
+  #+BEGIN_SRC go
+    func main() {
+      paths := make([]string, 0, 100)
+      filepath.Walk("dataProcess", func(path string, info os.FileInfo, err error) error {
+        if !info.IsDir() {
+          paths = append(paths, path)
+        }
+        return nil
+      })
+      for i, path := range paths {
+        if filepath.Base(path)[0] != '.' {
+          newPath := filepath.Join(filepath.Dir(path), fmt.Sprintf("split%02d.csv", i))
+          os.Rename(path, newPath)
+        }
+      }
+    }
+  #+END_SRC
+
+  #+BEGIN_SRC bash
+    mddct@mddcts-MacBook-Pro ~/m/dataProcess> time ls -a
+    .		split11.csv	split24.csv	split37.csv	split50.csv
+    ..		split12.csv	split25.csv	split38.csv	split51.csv
+    .DS_Store	split13.csv	split26.csv	split39.csv	split52.csv
+    split01.csv	split14.csv	split27.csv	split40.csv	split53.csv
+    split02.csv	split15.csv	split28.csv	split41.csv	split54.csv
+    split03.csv	split16.csv	split29.csv	split42.csv	split55.csv
+    split04.csv	split17.csv	split30.csv	split43.csv	split56.csv
+    split05.csv	split18.csv	split31.csv	split44.csv	split57.csv
+    split06.csv	split19.csv	split32.csv	split45.csv	split58.csv
+    split07.csv	split20.csv	split33.csv	split46.csv
+    split08.csv	split21.csv	split34.csv	split47.csv
+    split09.csv	split22.csv	split35.csv	split48.csv
+    split10.csv	split23.csv	split36.csv	split49.csv
+    0.00 real         0.00 user         0.00 sys
+
+  #+END_SRC
+
+* DONE 将header 存入header.txt 每行一个
+  CLOSED: [2018-05-29 Tue 09:41]
+
+* DONE 猜想不会有空值 => (没有空值)
+  CLOSED: [2018-05-29 Tue 10:20]
+  - []  读取任意一个文件 用pandas
+  - []  用go 多携程判断所有文件是否有空值， 如果有 将有空值的文件名写入log
+  #+BEGIN_SRC go
+    var wg sync.WaitGroup
+    // fmt.Println(paths[1:]) // ommit the .DS_store file
+    for i := range paths {
+      wg.Add(1)
+      go func(path string) {
+        defer wg.Done()
+        // fmt.Println("%s is processing", path)
+        file, err := os.Open(path)
+        if err != nil {
+          log.Fatal(err)
+        }
+        defer file.Close()
+        csvF := csv.NewReader(file)
+        line := 1
+        for {
+          records, err := csvF.Read()
+          if err == io.EOF {
+            break
+          }
+          if err != nil {
+            log.Fatal(err)
+          }
+          for i := range records {
+            if records[i] == "" {
+              log.Fatalf("%s (%dcol , %d)", path, line, i)
+            }
+          }
+          line++
+        }
+
+      }(paths[i])
+    }
+    wg.Wait()
+
+
+  #+END_SRC
+  #+BEGIN_SRC bash
+    mddct@mddcts-MacBook-Pro ~/machine-learning> time go run isnullfeature.go
+    24.49 real        76.39 user         9.05 sys
+  #+END_SRC
+* DONE 探索每个含义
+  CLOSED: [2018-06-06 Wed 11:54]
+  - pandas 读取任一个文件， 探索每个特征含义，
+  - go 处理整个分类特征的取值范围， 存入文件中， 文件名格式 [featureName]Categoty.txt
+* C1-C14 bar chart
+  [[C1-14/barchart_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C14Map.txt_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C15Map.txt_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C16Map.txt_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C17Map.txt_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C18Map.txt_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C19Map.txt_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C20Map.txt_2018-06-06_12-14-45.png]]
+
+  [[C1-14/C21Map.txt_2018-06-06_12-14-45.png]]
