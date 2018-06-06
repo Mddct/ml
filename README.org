@@ -10,7 +10,42 @@
   
 * DONE 修改文件名为split[0-9]*
   CLOSED: [2018-05-29 Tue 09:34]
+#+BEGIN_SRC go
+func main() {
+	paths := make([]string, 0, 100)
+	filepath.Walk("dataProcess", func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() {
+			paths = append(paths, path)
+		}
+		return nil
+	})
+	for i, path := range paths {
+		if filepath.Base(path)[0] != '.' {
+			newPath := filepath.Join(filepath.Dir(path), fmt.Sprintf("split%02d.csv", i))
+			os.Rename(path, newPath)
+		}
+	}
+}
+#+END_SRC
 
+#+BEGIN_SRC bash
+mddct@mddcts-MacBook-Pro ~/m/dataProcess> time ls -a
+.		split11.csv	split24.csv	split37.csv	split50.csv
+..		split12.csv	split25.csv	split38.csv	split51.csv
+.DS_Store	split13.csv	split26.csv	split39.csv	split52.csv
+split01.csv	split14.csv	split27.csv	split40.csv	split53.csv
+split02.csv	split15.csv	split28.csv	split41.csv	split54.csv
+split03.csv	split16.csv	split29.csv	split42.csv	split55.csv
+split04.csv	split17.csv	split30.csv	split43.csv	split56.csv
+split05.csv	split18.csv	split31.csv	split44.csv	split57.csv
+split06.csv	split19.csv	split32.csv	split45.csv	split58.csv
+split07.csv	split20.csv	split33.csv	split46.csv
+split08.csv	split21.csv	split34.csv	split47.csv
+split09.csv	split22.csv	split35.csv	split48.csv
+split10.csv	split23.csv	split36.csv	split49.csv
+        0.00 real         0.00 user         0.00 sys
+
+#+END_SRC
 
 * DONE 将header 存入header.txt 每行一个
   CLOSED: [2018-05-29 Tue 09:41]
