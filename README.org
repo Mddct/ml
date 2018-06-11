@@ -191,21 +191,21 @@
        return nil
      }
    #+END_SRC
-   [[C1-14/barchart_2018-06-06_12-14-45.png]]
+   [[C1-14/barchart.png]]
 
-   [[C1-14/C14Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C14Map.png]]
 
-   [[C1-14/C15Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C15Map.png]]
 
-   [[C1-14/C16Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C16Map.png]]
 
-   [[C1-14/C17Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C17Map.png]]
 
-   [[C1-14/C18Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C18Map.png]]
 
-   [[C1-14/C19Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C19Map.png]]
 
-   [[C1-14/C20Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C20Map.png]]
 
-   [[C1-14/C21Map.txt_2018-06-06_12-14-45.png]]
+   [[C1-14/C21Map.png]]
 ** TODO [TODO] 初步分析
